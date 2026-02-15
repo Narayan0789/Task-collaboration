@@ -58,7 +58,8 @@ app.get("/", (req, res) => {
 });
 
 
-mongoose.connect("mongodb://127.0.0.1:27017/taskcollab")
+mongoose.connect("mongodb+srv://narayan:narayan123@cluster0.8hh1s8p.mongodb.net/taskcollab?retryWrites=true&w=majority")
+
 .then(() => console.log("MongoDB Connected"))
 .catch(err => console.log(err));
 
