@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import API from "../services/api";
 import TaskPage from "./TaskPage";
 import { DragDropContext, Droppable } from "@hello-pangea/dnd";
@@ -8,12 +8,9 @@ function ListPage({ boardId }) {
   const [lists, setLists] = useState([]);
   const [title, setTitle] = useState("");
 
-  
-useEffect(() => {
-  fetchLists();
-}, []);
 
-  const fetchLists = async () => {
+  // ✅ useCallback use kiya
+  const fetchLists = useCallback(async () => {
 
     try {
 
@@ -26,7 +23,15 @@ useEffect(() => {
 
     }
 
-  };
+  }, [boardId]);
+
+
+  // ✅ proper dependency
+  useEffect(() => {
+
+    fetchLists();
+
+  }, [fetchLists]);
 
 
   const createList = async () => {
@@ -83,7 +88,6 @@ useEffect(() => {
 
       <h2>Lists</h2>
 
-
       {/* Input */}
       <div style={{ marginBottom: "15px" }}>
 
@@ -102,7 +106,6 @@ useEffect(() => {
         </button>
 
       </div>
-
 
 
       {/* Drag Drop */}
@@ -149,3 +152,4 @@ useEffect(() => {
 }
 
 export default ListPage;
+
