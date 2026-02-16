@@ -8,10 +8,10 @@ function ListPage({ boardId }) {
   const [lists, setLists] = useState([]);
   const [title, setTitle] = useState("");
 
-  useEffect(() => {
-    fetchLists();
-  }, [fetchLists]);
-
+  
+useEffect(() => {
+  fetchLists();
+}, []);
 
   const fetchLists = async () => {
 
