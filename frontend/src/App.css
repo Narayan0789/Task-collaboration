@@ -1,0 +1,104 @@
+/* Full page background */
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(to right, #667eea, #764ba2);
+  min-height: 100vh;
+  color: #172b4d;
+}
+
+/* Main container */
+.app-container {
+  padding: 20px;
+}
+
+/* Heading */
+.main-heading {
+  color: white;
+  margin-bottom: 20px;
+}
+
+/* Section */
+.section {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Input */
+.input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+  outline: none;
+}
+
+/* Button */
+.button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #5a67d8;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.button:hover {
+  background: #434190;
+}
+
+/* Board item */
+.board-item {
+  padding: 10px;
+  background: #edf2f7;
+  margin-top: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.board-item:hover {
+  background: #e2e8f0;
+}
+
+/* Selected board */
+.board-selected {
+  background: #5a67d8;
+  color: white;
+}
+
+/* Lists container */
+.lists-container {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+}
+
+/* List card */
+.list-card {
+  background: #f7fafc;
+  padding: 15px;
+  border-radius: 10px;
+  min-width: 250px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Task card */
+.task-card {
+  background: white;
+  padding: 8px;
+  border-radius: 6px;
+  margin-top: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.task-card {
+  background: white;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  cursor: grab;
+}
