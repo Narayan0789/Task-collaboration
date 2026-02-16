@@ -1,5 +1,3 @@
-require("dotenv").config();
-
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -22,34 +20,51 @@ app.use("/api/boards", boardRoutes);
 app.use("/api/lists", listRoutes);
 app.use("/api/tasks", taskRoutes);
 
-app.get("/", (req, res) => {
-  res.send("API is running...");
-});
 
+// Create HTTP server
 const server = http.createServer(app);
 
+
+// Setup Socket.io
 const io = new Server(server, {
   cors: {
     origin: "*"
   }
 });
 
+
+// Socket connection
 io.on("connection", (socket) => {
+
   console.log("User connected:", socket.id);
 
   socket.on("taskCreated", (data) => {
+
     socket.broadcast.emit("taskCreated", data);
+
   });
 
   socket.on("disconnect", () => {
+
     console.log("User disconnected");
+
   });
+
 });
 
-mongoose.connect(process.env.MONGO_URI)
+
+app.get("/", (req, res) => {
+  res.send("API is running...");
+});
+
+
+mongoose.connect("mongodb+srv://narayan:narayan123@cluster0.8hh1s8p.mongodb.net/taskcollab?retryWrites=true&w=majority")
+
 .then(() => console.log("MongoDB Connected"))
 .catch(err => console.log(err));
 
+
+// IMPORTANT: use server.listen
 const PORT = process.env.PORT || 5000;
 
 server.listen(PORT, () => {
