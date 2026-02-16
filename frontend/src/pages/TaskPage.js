@@ -22,7 +22,7 @@ function TaskPage({ listId }) {
       socket.off("taskCreated");
     };
 
-  }, [listId]);
+  }, [listId, fetchTasks]);
 
 
   // Fetch tasks

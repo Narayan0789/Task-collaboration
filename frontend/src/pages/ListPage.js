@@ -10,7 +10,7 @@ function ListPage({ boardId }) {
 
   useEffect(() => {
     fetchLists();
-  }, [boardId]);
+  }, [fetchLists]);
 
 
   const fetchLists = async () => {
