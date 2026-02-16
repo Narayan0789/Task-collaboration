@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import API from "../services/api";
 import socket from "../services/socket";
 import { Draggable } from "@hello-pangea/dnd";
@@ -8,41 +8,34 @@ function TaskPage({ listId }) {
   const [tasks, setTasks] = useState([]);
   const [title, setTitle] = useState("");
 
+  // ✅ Fetch tasks (useCallback se wrap kiya)
+  const fetchTasks = useCallback(async () => {
 
-  // Load tasks + realtime listener
+    try {
+      const res = await API.get(`/tasks/${listId}`);
+      setTasks(res.data);
+    } catch (err) {
+      console.error(err);
+    }
+
+  }, [listId]);
+
+
+  // ✅ Load tasks + realtime listener
   useEffect(() => {
 
     fetchTasks();
 
-    socket.on("taskCreated", () => {
-      fetchTasks();
-    });
+    socket.on("taskCreated", fetchTasks);
 
     return () => {
-      socket.off("taskCreated");
+      socket.off("taskCreated", fetchTasks);
     };
 
-  }, [listId, fetchTasks]);
+  }, [fetchTasks]);
 
 
-  // Fetch tasks
-  const fetchTasks = async () => {
-
-    try {
-
-      const res = await API.get(`/tasks/${listId}`);
-      setTasks(res.data);
-
-    } catch (err) {
-
-      console.error(err);
-
-    }
-
-  };
-
-
-  // Create task
+  // ✅ Create task
   const createTask = async () => {
 
     if (!title.trim()) return;
